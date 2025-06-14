@@ -80,15 +80,15 @@ declare namespace Ripple {
         }
 
         interface CurveTokens {
-                readonly curveAccelerateMax: string;
-                readonly curveAccelerateMid: string;
-                readonly curveAccelerateMin: string;
-                readonly curveDecelerateMax: string;
-                readonly curveDecelerateMid: string;
-                readonly curveDecelerateMin: string;
-                readonly curveEasyEaseMax: string;
-                readonly curveEasyEase: string;
-                readonly curveLinear: string;
+                readonly curveAccelerateMax: number[];
+                readonly curveAccelerateMid: number[];
+                readonly curveAccelerateMin: number[];
+                readonly curveDecelerateMax: number[];
+                readonly curveDecelerateMid: number[];
+                readonly curveDecelerateMin: number[];
+                readonly curveEasyEaseMax: number[];
+                readonly curveEasyEase: number[];
+                readonly curveLinear: number[];
         }
 
         const curves: CurveTokens;
