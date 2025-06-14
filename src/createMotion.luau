@@ -5,6 +5,7 @@ local immediateSolver = require(script.Parent.solvers.immediate)
 local linearSolver = require(script.Parent.solvers.linear)
 local springSolver = require(script.Parent.solvers.spring)
 local tweenSolver = require(script.Parent.solvers.tween)
+local easeSolver = require(script.Parent.solvers.ease)
 local intermediate = require(script.Parent.utils.intermediate)
 local assign = require(script.Parent.utils.assign)
 local merge = require(script.Parent.utils.merge)
@@ -194,9 +195,13 @@ local function createMotion<T>(initialValue: T, options: types.MotionOptions?): 
 		self:to(springSolver(value :: any, params))
 	end
 
-	local function tween(self, value, params)
-		self:to(tweenSolver(value :: any, params))
-	end
+       local function tween(self, value, params)
+               self:to(tweenSolver(value :: any, params))
+       end
+
+       local function ease(self, value, params)
+               self:to(easeSolver(value :: any, params))
+       end
 
 	local function step(self, deltaTime)
 		for key, handler in motionSolvers do
@@ -289,9 +294,10 @@ local function createMotion<T>(initialValue: T, options: types.MotionOptions?): 
 		to = to,
 		immediate = immediate,
 		linear = linear,
-		spring = spring,
-		tween = tween,
-		step = step,
+               spring = spring,
+               tween = tween,
+               ease = ease,
+               step = step,
 		isComplete = isComplete,
 		onComplete = onComplete,
 		onStep = onStep,

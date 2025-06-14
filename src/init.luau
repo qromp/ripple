@@ -17,6 +17,8 @@ return {
 	config = require(script.config),
 	immediate = require(script.solvers.immediate),
 	linear = require(script.solvers.linear),
-	spring = require(script.solvers.spring),
-	tween = require(script.solvers.tween),
+       spring = require(script.solvers.spring),
+       tween = require(script.solvers.tween),
+       ease = require(script.solvers.ease),
+       curves = require(script.curves),
 }

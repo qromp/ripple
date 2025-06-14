@@ -28,12 +28,19 @@ export type LinearOptions = {
 } | number?
 
 export type TweenOptions = {
-	time: number?,
-	style: Enum.EasingStyle?,
-	direction: Enum.EasingDirection?,
-	repeatCount: number?,
-	reverses: boolean?,
-	delayTime: number?,
+        time: number?,
+        style: Enum.EasingStyle?,
+        direction: Enum.EasingDirection?,
+        repeatCount: number?,
+        reverses: boolean?,
+        delayTime: number?,
+}
+
+export type EasingStyle = Enum.EasingStyle | { number }
+
+export type EaseOptions = {
+       duration: number?,
+       easingStyle: EasingStyle?,
 }
 
 export type Motion<T = number> = {
@@ -49,9 +56,10 @@ export type Motion<T = number> = {
 	to: (self: Motion<T>, goal: MotionSolver | { [any]: MotionSolver }) -> (),
 	immediate: (self: Motion<T>, goal: T) -> (),
 	spring: (self: Motion<T>, goal: T, options: SpringOptions?) -> (),
-	linear: (self: Motion<T>, goal: T, options: LinearOptions?) -> (),
-	tween: (self: Motion<T>, goal: T, options: TweenOptions?) -> (),
-	step: (self: Motion<T>, deltaTime: number) -> T,
+        linear: (self: Motion<T>, goal: T, options: LinearOptions?) -> (),
+        tween: (self: Motion<T>, goal: T, options: TweenOptions?) -> (),
+       ease: (self: Motion<T>, goal: T, options: EaseOptions?) -> (),
+        step: (self: Motion<T>, deltaTime: number) -> T,
 	isComplete: (self: Motion<T>) -> boolean,
 	onComplete: (self: Motion<T>, callback: (value: T) -> ()) -> Cleanup,
 	onStep: (self: Motion<T>, callback: (value: T, deltaTime: number) -> ()) -> Cleanup,

@@ -63,16 +63,38 @@ declare namespace Ripple {
 
 	function spring<T extends MotionGoal>(goal: T, options?: SpringOptions): MotionSolver<T>;
 
-	interface TweenOptions {
-		readonly time?: number;
-		readonly style?: Enum.EasingStyle;
-		readonly direction?: Enum.EasingDirection;
-		readonly repeatCount?: number;
-		readonly reverses?: boolean;
-		readonly delayTime?: number;
-	}
+        interface TweenOptions {
+                readonly time?: number;
+                readonly style?: Enum.EasingStyle;
+                readonly direction?: Enum.EasingDirection;
+                readonly repeatCount?: number;
+                readonly reverses?: boolean;
+                readonly delayTime?: number;
+        }
 
-	function tween<T extends MotionGoal>(goal: T, options?: TweenOptions): MotionSolver<T>;
+        type EasingStyle = Enum.EasingStyle | number[];
+
+        interface EaseOptions {
+                readonly duration?: number;
+                readonly easingStyle?: EasingStyle;
+        }
+
+        interface CurveTokens {
+                readonly curveAccelerateMax: string;
+                readonly curveAccelerateMid: string;
+                readonly curveAccelerateMin: string;
+                readonly curveDecelerateMax: string;
+                readonly curveDecelerateMid: string;
+                readonly curveDecelerateMin: string;
+                readonly curveEasyEaseMax: string;
+                readonly curveEasyEase: string;
+                readonly curveLinear: string;
+        }
+
+        const curves: CurveTokens;
+
+        function tween<T extends MotionGoal>(goal: T, options?: TweenOptions): MotionSolver<T>;
+        function ease<T extends MotionGoal>(goal: T, options?: EaseOptions): MotionSolver<T>;
 }
 
 declare namespace Ripple {
@@ -88,9 +110,10 @@ declare namespace Ripple {
 		to(solver: MotionSolver<T> | MapSolvers<PartialMotionGoal<T>>): void;
 		immediate(goal: PartialMotionGoal<T>): void;
 		linear(goal: PartialMotionGoal<T>, options?: LinearOptions): void;
-		spring(goal: PartialMotionGoal<T>, options?: SpringOptions): void;
-		tween(goal: PartialMotionGoal<T>, options?: TweenOptions): void;
-		step(deltaTime: number): T;
+                spring(goal: PartialMotionGoal<T>, options?: SpringOptions): void;
+                tween(goal: PartialMotionGoal<T>, options?: TweenOptions): void;
+                ease(goal: PartialMotionGoal<T>, options?: EaseOptions): void;
+                step(deltaTime: number): T;
 		isComplete(): boolean;
 		onComplete(callback: (value: T) => void): Cleanup;
 		onStep(callback: (value: T, deltaTime: number) => void): Cleanup;
